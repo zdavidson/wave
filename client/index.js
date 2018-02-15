@@ -1,15 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-class Main extends React.Component {
-  render () {
-    return (
-      <div id='main' className='row container'>
-        {/* The music starts here! */}
-      </div>
-    )
-  }
-}
+import Main from './Main'
 
 ReactDOM.render(
   <Main />,
