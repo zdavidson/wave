@@ -5,9 +5,9 @@ export default class Album extends React.Component {
     return (
       <div class="album">
         <a>
-          <img src="default-album.jpg" />
-          <p>ALBUM 1</p>
-          <small>Artist Name</small>
+          <img src={this.props.albumImg} />
+          <p>{this.props.name}</p>
+          <small>{this.props.artist}</small>
         </a>
       </div>
     );
