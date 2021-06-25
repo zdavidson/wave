@@ -1,14 +1,19 @@
 import React from "react";
 
 export default function Album(props) {
-  console.log("Data:", props.data);
   return (
-    <div class="album">
-      <a>
-        <img src={props.data} />
-        <p>{props.name}</p>
-        <small>{props.artist}</small>
-      </a>
-    </div>
+    <>
+      {props.data.map((album) => {
+        return (
+          <div key={album.id} className="album">
+            <a>
+              <img src={album.artworkUrl} />
+              <p>{album.name}</p>
+              <small>{album.artist.name}</small>
+            </a>
+          </div>
+        );
+      })}
+    </>
   );
 }
