@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
 import AllAlbums from "./AllAlbums";
+import SingleAlbum from "./SingleAlbum";
 
 export default function Main() {
   const [error, setError] = useState(null);
@@ -35,7 +36,8 @@ export default function Main() {
       <div id="main" className="row container">
         <Sidebar />
         <div className="container">
-          <AllAlbums data={items} />
+          {/* <AllAlbums data={items} /> */}
+          <SingleAlbum data={items} />
         </div>
         <Player />
       </div>
