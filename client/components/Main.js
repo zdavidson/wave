@@ -1,49 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
 import AllAlbums from "./AllAlbums";
 
-export default class Main extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Main() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
 
-    this.state = [
-      {
-        id: 1,
-        name: "No Dummy",
-        artworkUrl: "default-album.jpg",
-        artistId: 1,
-        artist: {
-          id: 1,
-          name: "The Crash Test Dummies",
-        },
-      },
-      {
-        id: 2,
-        name: "I React to State",
-        artworkUrl: "default-album.jpg",
-        artistId: 1,
-        artist: {
-          id: 1,
-          name: "The Crash Test Dummies",
-        },
-      },
-    ];
-  }
+  useEffect(() => {
+    async function fetchData() {
+      await fetch("/api/albums")
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setItems(result);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
+    fetchData();
+  }, []);
 
-  render() {
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else if (isLoaded) {
     return (
       <div id="main" className="row container">
         <Sidebar />
         <div className="container">
-          <AllAlbums
-            name1={this.state[0].name}
-            albumImg1={this.state[0].artworkUrl}
-            artist1={this.state[0].artist.name}
-            name2={this.state[1].name}
-            albumImg2={this.state[1].artworkUrl}
-            artist2={this.state[1].artist.name}
-          />
+          <AllAlbums data={items} />
         </div>
         <Player />
       </div>

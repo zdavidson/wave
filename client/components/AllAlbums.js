@@ -3,17 +3,18 @@ import Album from "./Album";
 
 export default function AllAlbums(props) {
   return (
-    <div id="albums" class="row wrap">
-      <Album
-        name={props.name1}
-        albumImg={props.albumImg1}
-        artist={props.artist1}
-      />
-      <Album
-        name={props.name2}
-        albumImg={props.albumImg2}
-        artist={props.artist2}
-      />
+    <div id="albums" className="row wrap">
+      {props.data.map((album) => {
+        return (
+          <div key={album.id} className="album">
+            <a>
+              <img src={album.artworkUrl} />
+              <p>{album.name}</p>
+              <small>{album.artist.name}</small>
+            </a>
+          </div>
+        );
+      })}
     </div>
   );
 }
