@@ -29,12 +29,12 @@ export default function SingleAlbum(props) {
     <div id={singleData.id} className="column">
       <div className="album">
         <a>
-          <img src={props.data.artworkUrl} />
-          <p>{props.data.name}</p>
-          <small>{props.data.artist.name}</small>
+          <img src={singleData.artworkUrl} />
+          <p>{singleData.name}</p>
+          <small>{singleData.artist.name}</small>
         </a>
       </div>
-      <Songs data={props.data} />
+      <Songs data={singleData} />
     </div>
   );
 }

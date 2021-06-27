@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Album from "./Album";
 
 export default function AllAlbums(props) {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -22,9 +24,15 @@ export default function AllAlbums(props) {
     fetchData();
   }, []);
 
-  return (
-    <div id="albums" className="row wrap">
-      <Album data={props.data} clickHandler={props.clickHandler} />
-    </div>
-  );
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else if (isLoaded) {
+    return (
+      <div id="albums" className="row wrap">
+        <Album data={items} clickHandler={props.clickHandler} />
+      </div>
+    );
+  }
 }

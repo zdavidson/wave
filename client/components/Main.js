@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
 import AllAlbums from "./AllAlbums";
@@ -28,51 +28,45 @@ export default function Main() {
   }, []);
   // Use React Router for the paths
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else if (isLoaded) {
-    return (
-      <div id="main" className="row container">
-        <Sidebar />
-        <Router forceRefresh={false}>
-          <div className="container">
-            <Route exact path="/">
-              <AllAlbums data={items} />
-            </Route>
-            <Route path="/albums">
-              <AllAlbums data={items} />
-            </Route>
-            <Route path="/:id">
-              <SingleAlbum data={selectedAlbum} />
-            </Route>
-          </div>
-        </Router>
-        <Player />
-      </div>
-    );
+  return (
+    <div id="main" className="row container">
+      <Sidebar />
+      <Router>
+        <div className="container">
+          <Route exact path="/">
+            <AllAlbums />
+          </Route>
+          <Route path="/albums">
+            <AllAlbums />
+          </Route>
+          <Route path="/single-album">
+            <SingleAlbum />
+          </Route>
+        </div>
+      </Router>
+      <Player />
+    </div>
+  );
 
-    // if (selectedAlbum["songs"] === undefined) {
-    //   return (
-    //     <div id="main" className="row container">
-    //       <Sidebar />
-    //       <div className="container">
-    //         <AllAlbums data={items} clickHandler={clickHandler} />
-    //       </div>
-    //       <Player />
-    //     </div>
-    //   );
-    // } else {
-    //   return (
-    //     <div id="main" className="row container">
-    //       <Sidebar />
-    //       <div className="container">
-    //         <SingleAlbum data={selectedAlbum} />
-    //       </div>
-    //       <Player />
-    //     </div>
-    //   );
-    // }
-  }
+  // if (selectedAlbum["songs"] === undefined) {
+  //   return (
+  //     <div id="main" className="row container">
+  //       <Sidebar />
+  //       <div className="container">
+  //         <AllAlbums data={items} clickHandler={clickHandler} />
+  //       </div>
+  //       <Player />
+  //     </div>
+  //   );
+  // } else {
+  //   return (
+  //     <div id="main" className="row container">
+  //       <Sidebar />
+  //       <div className="container">
+  //         <SingleAlbum data={selectedAlbum} />
+  //       </div>
+  //       <Player />
+  //     </div>
+  //   );
+  // }
 }
