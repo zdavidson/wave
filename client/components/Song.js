@@ -1,5 +1,13 @@
 import React from "react";
 
+const audio = document.createElement("audio");
+
+const startAudio = (audioUrl) => {
+  audio.src = audioUrl;
+  audio.load();
+  audio.play();
+};
+
 export default function Song(props) {
   const artistName = props.data.artist.name;
   return (
@@ -8,7 +16,12 @@ export default function Song(props) {
         return (
           <tr key={song.id}>
             <td>
-              <i className="fa fa-play-circle" />
+              <i
+                onClick={() => {
+                  startAudio(song.audioUrl);
+                }}
+                className="fa fa-play-circle"
+              />
             </td>
             <td>{song.id}</td>
             <td>{song.name}</td>

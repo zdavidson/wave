@@ -3,8 +3,13 @@
   box-sizing: border-box;
 }
 
+a {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
 body {
-  font-family: 'Open Sans', arial,sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   padding-bottom: 56px;
   margin: 0;
   height: 100vh;

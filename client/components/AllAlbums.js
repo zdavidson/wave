@@ -31,7 +31,7 @@ export default function AllAlbums(props) {
   } else if (isLoaded) {
     return (
       <div id="albums" className="row wrap">
-        <Album data={items} clickHandler={props.clickHandler} />
+        <Album data={items} />
       </div>
     );
   }

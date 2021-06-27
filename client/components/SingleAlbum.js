@@ -30,7 +30,7 @@ export default function SingleAlbum(props) {
   const [selectedAlbum, setSelectedAlbum] = useState({});
 
   useEffect(() => {
-    const thisAlbumId = props.data.albumId;
+    const thisAlbumId = props.match.params.albumId;
     async function getSelectedAlbum(thisAlbumId) {
       await fetch(`/api/albums/${thisAlbumId}`)
         .then((res) => res.json())
