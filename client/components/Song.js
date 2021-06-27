@@ -7,21 +7,28 @@ const startAudio = (audioUrl) => {
   audio.play();
 };
 
-const makeActive = (songId) => {
-  document.getElementById(songId).classList.add("active");
-};
-
-const makeInactive = (songId) => {
-  if (songId !== 0) {
-    document.getElementById(songId).classList.remove("active");
-  } else {
-    console.log("no previous song");
-  }
-};
-
 export default function Song(props) {
-  let [currentSong, setCurrentSong] = useState({});
-  let formerSongId;
+  const [currentSong, setCurrentSong] = useState();
+  const [selectedRow, setSelectedRow] = useState("");
+  const [formerElement, setFormerElement] = useState("");
+
+  useEffect(() => {
+    if (formerElement == "") {
+      return;
+    } else {
+      formerElement.classList.remove("active");
+    }
+  });
+
+  useEffect(() => {
+    const element = document.getElementById(selectedRow);
+    if (element == null) {
+      return;
+    } else {
+      element.classList.add("active");
+      setFormerElement(element);
+    }
+  });
 
   const artistName = props.data.artist.name;
 
@@ -33,10 +40,8 @@ export default function Song(props) {
             <td>
               <i
                 onClick={() => {
-                  formerSongId = currentSong.id || 0;
-                  makeInactive(formerSongId);
-                  currentSong = song;
-                  makeActive(currentSong.id);
+                  setCurrentSong(song);
+                  setSelectedRow(song.id);
                   startAudio(song.audioUrl);
                 }}
                 className="fa fa-play-circle"
