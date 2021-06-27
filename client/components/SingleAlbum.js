@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Album from "./Album";
 import Songs from "./Songs";
 
@@ -25,16 +25,45 @@ const singleData = {
 };
 
 export default function SingleAlbum(props) {
-  return (
-    <div id={singleData.id} className="column">
-      <div className="album">
-        <a>
-          <img src={singleData.artworkUrl} />
-          <p>{singleData.name}</p>
-          <small>{singleData.artist.name}</small>
-        </a>
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [selectedAlbum, setSelectedAlbum] = useState({});
+
+  useEffect(() => {
+    const thisAlbumId = props.data.albumId;
+    async function getSelectedAlbum(thisAlbumId) {
+      await fetch(`/api/albums/${thisAlbumId}`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setSelectedAlbum(result);
+            setIsLoaded(true);
+          },
+          (error) => {
+            setError(error);
+            setIsLoaded(true);
+          }
+        );
+    }
+    getSelectedAlbum(thisAlbumId);
+  }, []);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else if (isLoaded) {
+    return (
+      <div id={selectedAlbum.id} className="column">
+        <div className="album">
+          <a>
+            <img src={selectedAlbum.artworkUrl} />
+            <p>{selectedAlbum.name}</p>
+            <small>{selectedAlbum.artist.name}</small>
+          </a>
+        </div>
+        <Songs data={selectedAlbum} />
       </div>
-      <Songs data={singleData} />
-    </div>
-  );
+    );
+  }
 }

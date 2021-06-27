@@ -8,7 +8,7 @@ import SingleAlbum from "./SingleAlbum";
 export default function Main() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [selectedAlbum, setSelectedAlbum] = useState({});
+  const [selectedAlbum, setSelectedAlbum] = useState({ albumId: 3 });
 
   useEffect((albumId) => {
     async function handleClick() {
@@ -36,11 +36,11 @@ export default function Main() {
           <Route exact path="/">
             <AllAlbums />
           </Route>
-          <Route path="/albums">
+          <Route exact path="/albums">
             <AllAlbums />
           </Route>
-          <Route path="/single-album">
-            <SingleAlbum />
+          <Route path="/albums/:albumId">
+            <SingleAlbum data={selectedAlbum} />
           </Route>
         </div>
       </Router>

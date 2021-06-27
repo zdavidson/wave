@@ -6,7 +6,7 @@ export default function Album(props) {
     <>
       {props.data.map((album) => {
         return (
-          <div key={album.id} className="album">
+          <div key={album.id} id={album.id} className="album">
             <a onClick={clickHandler}>
               <img src={album.artworkUrl} />
               <p>{album.name}</p>
