@@ -1,7 +1,9 @@
 import React from "react";
 
-export default class Player extends React.Component {
-  render() {
+export default function Player(props) {
+  if (props.currentSong.id == undefined) {
+    return <div></div>;
+  } else {
     return (
       <div id="player-container">
         <div id="player-controls">

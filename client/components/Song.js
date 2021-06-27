@@ -8,7 +8,6 @@ const startAudio = (audioUrl) => {
 };
 
 export default function Song(props) {
-  const [currentSong, setCurrentSong] = useState();
   const [selectedRow, setSelectedRow] = useState("");
   const [formerElement, setFormerElement] = useState("");
   const [formerIcon, setFormerIcon] = useState("");
@@ -36,15 +35,6 @@ export default function Song(props) {
     }
   });
 
-  // useEffect(() => {
-  //   if (element == null) {
-  //     return;
-  //   } else {
-  //     const icon = document.getElementById(`icon-${selectedRow}`);
-  //     icon.style.display = "none";
-  //   }
-  // });
-
   const artistName = props.data.artist.name;
 
   return (
@@ -56,7 +46,7 @@ export default function Song(props) {
               <i
                 id={`icon-${song.id}`}
                 onClick={() => {
-                  setCurrentSong(song);
+                  props.setCurrentSong(song);
                   setSelectedRow(song.id);
                   startAudio(song.audioUrl);
                 }}

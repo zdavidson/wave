@@ -62,7 +62,7 @@ export default function SingleAlbum(props) {
             <small>{selectedAlbum.artist.name}</small>
           </a>
         </div>
-        <Songs data={selectedAlbum} />
+        <Songs data={selectedAlbum} setCurrentSong={props.setCurrentSong} />
       </div>
     );
   }
