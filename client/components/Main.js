@@ -7,7 +7,8 @@ import SingleAlbum from "./SingleAlbum";
 
 export default function Main() {
   const [currentSong, setCurrentSong] = useState({});
-  console.log(currentSong);
+  const audio = document.createElement("audio");
+
   return (
     <Router>
       <div id="main" className="row container">
@@ -23,12 +24,16 @@ export default function Main() {
           <Route
             path="/albums/:albumId"
             render={(routeProps) => (
-              <SingleAlbum {...routeProps} setCurrentSong={setCurrentSong} />
+              <SingleAlbum
+                {...routeProps}
+                setCurrentSong={setCurrentSong}
+                audio={audio}
+              />
             )}
           ></Route>
         </div>
 
-        <Player currentSong={currentSong} />
+        <Player audio={audio} currentSong={currentSong} />
       </div>
     </Router>
   );

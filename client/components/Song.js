@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const audio = document.createElement("audio");
-const startAudio = (audioUrl) => {
-  audio.src = audioUrl;
-  audio.load();
-  audio.play();
-};
-
 export default function Song(props) {
   const [selectedRow, setSelectedRow] = useState("");
   const [formerElement, setFormerElement] = useState("");
@@ -23,6 +16,7 @@ export default function Song(props) {
 
   const element = document.getElementById(selectedRow);
   const icon = document.getElementById(`icon-${selectedRow}`);
+  const audio = props.audio;
 
   useEffect(() => {
     if (element == null) {
@@ -48,7 +42,9 @@ export default function Song(props) {
                 onClick={() => {
                   props.setCurrentSong(song);
                   setSelectedRow(song.id);
-                  startAudio(song.audioUrl);
+                  audio.src = song.audioUrl;
+                  audio.load();
+                  audio.play();
                 }}
                 className="fa fa-play-circle"
               />

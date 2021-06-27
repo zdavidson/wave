@@ -17,6 +17,7 @@ export default function Songs(props) {
           data={props.data}
           test={test}
           setCurrentSong={props.setCurrentSong}
+          audio={props.audio}
         />
       </tbody>
     </table>
