@@ -4,16 +4,14 @@ export default function Songs(props) {
   return (
     <table id="songs">
       <tbody>
-        <tr class="gray">
+        <tr className="gray">
           <td />
           <td>#</td>
           <td>Name</td>
           <td>Artist</td>
           <td>Genre</td>
         </tr>
-        <Song />
-        <Song />
-        <Song />
+        <Song data={props.data} />
       </tbody>
     </table>
   );
