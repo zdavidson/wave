@@ -11,24 +11,39 @@ export default function Song(props) {
   const [currentSong, setCurrentSong] = useState();
   const [selectedRow, setSelectedRow] = useState("");
   const [formerElement, setFormerElement] = useState("");
+  const [formerIcon, setFormerIcon] = useState("");
 
   useEffect(() => {
     if (formerElement == "") {
       return;
     } else {
       formerElement.classList.remove("active");
+      formerIcon.style.display = "block";
     }
   });
 
+  const element = document.getElementById(selectedRow);
+  const icon = document.getElementById(`icon-${selectedRow}`);
+
   useEffect(() => {
-    const element = document.getElementById(selectedRow);
     if (element == null) {
       return;
     } else {
       element.classList.add("active");
+      icon.style.display = "none";
       setFormerElement(element);
+      setFormerIcon(icon);
     }
   });
+
+  // useEffect(() => {
+  //   if (element == null) {
+  //     return;
+  //   } else {
+  //     const icon = document.getElementById(`icon-${selectedRow}`);
+  //     icon.style.display = "none";
+  //   }
+  // });
 
   const artistName = props.data.artist.name;
 
@@ -39,6 +54,7 @@ export default function Song(props) {
           <tr key={song.id} id={song.id}>
             <td>
               <i
+                id={`icon-${song.id}`}
                 onClick={() => {
                   setCurrentSong(song);
                   setSelectedRow(song.id);
