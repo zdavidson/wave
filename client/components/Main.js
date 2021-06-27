@@ -8,26 +8,7 @@ import SingleAlbum from "./SingleAlbum";
 export default function Main() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      await fetch("/api/albums")
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setIsLoaded(true);
-            setItems(result);
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        );
-    }
-    fetchData();
-  }, []);
 
   useEffect((albumId) => {
     async function handleClick() {
