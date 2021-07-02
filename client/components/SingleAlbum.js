@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Album from "./Album";
 import Songs from "./Songs";
 
 const singleData = {
